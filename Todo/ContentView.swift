@@ -15,7 +15,7 @@ struct ContentView: View {
 //            Rectangle()
 //                .foregroundColor(Color.gray)
 ////                .frame(width:100%)
-            Text("抓住 zack")
+            Text("抓住 zack 哈哈")
                 .font(.callout)
                 .padding(.leading)
             Spacer()
