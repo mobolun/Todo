@@ -27,6 +27,10 @@ class ToDo:ObservableObject {
         self.toDoList[id].isChecked.toggle()
     }
     
+    func add(data:singleToDo) {
+        self.toDoList.append(singleToDo(title: data.title, id: self.count))
+    }
+    
     
 }
 
