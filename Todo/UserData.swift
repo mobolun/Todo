@@ -29,6 +29,7 @@ class ToDo:ObservableObject {
     
     func add(data:singleToDo) {
         self.toDoList.append(singleToDo(title: data.title, id: self.count))
+        count += 1
     }
     
     

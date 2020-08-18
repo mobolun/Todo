@@ -16,13 +16,16 @@ struct ContentView: View {
     singleToDo(title: "买一个慢")
     ])
     
+    @State var show:Bool = false
     
     var body: some View {
         
         VStack {
             title()
+                .padding(.leading)
+                .padding(.top)
             ScrollView (.vertical, showsIndicators: true) {
-                VStack (spacing: 20) {
+                VStack (spacing: 25) {
                     ForEach(self.userData.toDoList) {
                         Item(index: $0.id)
                             .environmentObject(self.userData)
@@ -31,18 +34,22 @@ struct ContentView: View {
                 }
                 .padding(.vertical)
             }
-            Image(systemName: "plus.circle.fill")
+            Button(action: {
+                self.show.toggle()
+            }) {
+                Image(systemName: "plus.circle.fill")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width:50)
                 .foregroundColor(.red)
+                .opacity(0.7)
                 .padding(.bottom)
                 .shadow(radius: 20)
-                .onTapGesture {
-//                    self.userData.toDoList.append(singleToDo(title: "全部买回家"))
-                    self.userData.add(data: singleToDo(title: "全部买回家"))
             }
-            
+            .sheet(isPresented: self.$show, content: {
+                EditiPage()
+                    .environmentObject(self.userData)
+            })
             }
         }
         
@@ -59,7 +66,7 @@ struct Item: View {
     var body: some View {
      HStack () {
          RoundedRectangle(cornerRadius:  20)
-             .foregroundColor(.gray)
+             .foregroundColor(Color.gray.opacity(0.3))
              .frame(width: UIScreen.main.bounds.size.width * 0.7)
          Spacer()
          
@@ -67,16 +74,19 @@ struct Item: View {
      .frame(height: 40)
      .background(Color.white)
      .cornerRadius(20)
-     .shadow(radius: 5)
+     .shadow(radius: 3)
      .padding(.horizontal)
      .overlay(
              HStack {
                 VStack (alignment: .leading, spacing: 4) {
                     Text(self.userData.toDoList[self.index].title)
-                         .font(.callout)
+                        .font(.callout)
+                        .foregroundColor(Color.black)
+                        .opacity(0.9)
                         .padding(.leading)
                     Text(self.userData.toDoList[self.index].date.description)
                         .foregroundColor(Color.blue)
+                        .opacity(0.7)
                         .font(.footnote)
                         .padding(.leading)
                 }
@@ -86,6 +96,7 @@ struct Item: View {
                      .aspectRatio(contentMode: .fit)
                      .frame(width: 28)
                      .foregroundColor(Color.red)
+                     .opacity(0.7)
                      .padding(.trailing)
                      .onTapGesture {
                         self.userData.toDoList[self.index].isChecked.toggle()
@@ -100,32 +111,25 @@ struct Item: View {
 struct title: View {
     var body: some View {
         HStack {
-            
-            
-            
             Image(systemName: "tag")
                 .resizable()
-                .frame(width: 25, height: 25)
+                .aspectRatio(contentMode: .fit)
+                .frame(width:23)
+                .rotationEffect(Angle(degrees: 90))
                 .foregroundColor(Color.red)
-                
-            
-//                .padding()
-                
+                .cornerRadius(5)
             Spacer()
             Text("已完成")
             Spacer()
-            
             Button(action: {print("tag")}){
-                
                 Image(systemName: "ellipsis")
-                   .resizable()
-                   .scaledToFill()
-                   .foregroundColor(Color.red)
-                   .frame(width: 5, height: 5)
-//                   .padding()
+                .resizable()
+                .scaledToFill()
+                .foregroundColor(Color.red)
+                .frame(width: 5, height: 5)
+                .padding(.trailing,30)
             }
         }
-        .padding(.horizontal)
     }
 }
 

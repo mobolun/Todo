@@ -14,6 +14,7 @@
 		E56F7ACE24D22D1B00E82E21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E56F7ACD24D22D1B00E82E21 /* Assets.xcassets */; };
 		E56F7AD124D22D1B00E82E21 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E56F7AD024D22D1B00E82E21 /* Preview Assets.xcassets */; };
 		E56F7AD424D22D1B00E82E21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E56F7AD224D22D1B00E82E21 /* LaunchScreen.storyboard */; };
+		E5871EE924EBB0630089E90B /* EditiPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5871EE824EBB0630089E90B /* EditiPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		E56F7AD024D22D1B00E82E21 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E56F7AD324D22D1B00E82E21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E56F7AD524D22D1B00E82E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5871EE824EBB0630089E90B /* EditiPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditiPage.swift; sourceTree = "<group>"; };
+		E5A05CB024E9063A00421935 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,8 @@
 				E56F7ACB24D22D1A00E82E21 /* ContentView.swift */,
 				E56C7D4324E2D5B80060B393 /* UserData.swift */,
 				E56F7ACD24D22D1B00E82E21 /* Assets.xcassets */,
+				E5A05CB024E9063A00421935 /* README.md */,
+				E5871EE824EBB0630089E90B /* EditiPage.swift */,
 				E56F7AD224D22D1B00E82E21 /* LaunchScreen.storyboard */,
 				E56F7AD524D22D1B00E82E21 /* Info.plist */,
 				E56F7ACF24D22D1B00E82E21 /* Preview Content */,
@@ -153,6 +158,7 @@
 				E56F7ACA24D22D1A00E82E21 /* SceneDelegate.swift in Sources */,
 				E56C7D4424E2D5B80060B393 /* UserData.swift in Sources */,
 				E56F7ACC24D22D1A00E82E21 /* ContentView.swift in Sources */,
+				E5871EE924EBB0630089E90B /* EditiPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
