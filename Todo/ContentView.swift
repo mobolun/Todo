@@ -8,17 +8,37 @@
 
 import SwiftUI
 
+
+func initUserData() -> [singleToDo] {
+    //用来处理存放整理好的数据
+    var outPut:[singleToDo] = []
+    //取出数据
+    if let dataDeEnd = UserDefaults.standard.object(forKey: "toDoList") as? Data {
+        //解码
+        let data = try! decoder.decode([singleToDo].self, from: dataDeEnd)
+        //整理数据,只保留没有删除标记的数据
+        for i in data {
+            if !i.delete {
+                outPut.append(singleToDo(title: i.title, isChecked: i.isChecked, date: i.date, delete: i.delete, id: i.id))
+            }
+        }
+        //返回整理好的数据
+        return outPut
+    } else {
+        //如果没有取出值,那返回空数组也是可以的
+        return outPut
+    }
+}
+
 struct ContentView: View {
     
-    @ObservedObject var userData:ToDo = ToDo(data: [
-    singleToDo(title: "买一个奔"),
-    singleToDo(title: "买一个驰"),
-    singleToDo(title: "买一个慢")
-    ])
-    
+//    @ObservedObject var userData:ToDo = ToDo(data: initUserData())
+    @ObservedObject var userData:ToDo = ToDo(data: [singleToDo(title: "抓一个 Zack", tags: ["生活","学习"], isChecked: true, delete: false)])
     @State var show:Bool = false
     
     var body: some View {
+        
+        
         
         VStack {
             title()
@@ -46,10 +66,10 @@ struct ContentView: View {
                 .padding(.bottom)
                 .shadow(radius: 20)
             }
-            .sheet(isPresented: self.$show, content: {
+            .sheet(isPresented: self.$show) {
                 EditiPage()
                     .environmentObject(self.userData)
-            })
+            }
             }
         }
         
@@ -99,7 +119,7 @@ struct Item: View {
                      .opacity(0.7)
                      .padding(.trailing)
                      .onTapGesture {
-                        self.userData.toDoList[self.index].isChecked.toggle()
+                        self.userData.check(id: self.index)
                         
                  }
              }
@@ -139,6 +159,7 @@ struct title: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+//        ContentView(userData: ToDo(data: [singleToDo(title: "买个车")]))
     }
 }
 #endif

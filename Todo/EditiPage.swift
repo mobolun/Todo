@@ -16,42 +16,23 @@ struct EditiPage: View {
     @State var unit:String = ""
     @State var total:String = ""
     @State var clockIn:Bool = false
-    
+    //用来保存用户为此项目选择的标签
+    @State var newTags:[String] = []
     @EnvironmentObject var userDate:ToDo
     @Environment(\.presentationMode) var show
     
     var body: some View {
-        VStack {
-            HStack {
-                Image(systemName: "xmark")
-                    .foregroundColor(.red)
-                    .opacity(0.6)
-                    .onTapGesture {
-                        self.show.wrappedValue.dismiss()
-                }
-                Spacer()
-                Text("新增项目")
-                Spacer()
-                Image(systemName: "checkmark")
-                    .foregroundColor(.red)
-                    .opacity(0.6)
-                    .onTapGesture {
-                        self.userDate.add(data: singleToDo(title: self.title, date: Date()))
-                        self.show.wrappedValue.dismiss()
-                }
-            }
-            .padding(.horizontal)
-            .padding(.top)
+        NavigationView {
             Form {
+                
                 Section {
                     HStack {
                         Text("项目名称")
                         TextField("例如:读完<<乔布斯自传>>", text: $title)
+                        
                     }
-                    HStack {
+                    NavigationLink(destination: TagP(tags: $userDate.tags,newTags: $newTags)) {
                         Text("标签")
-                        Spacer()
-                        Image(systemName: "chevron.right")
                     }
                 }
                 Section {
@@ -63,9 +44,10 @@ struct EditiPage: View {
                     }
                 }
                 Section {
-                    Toggle(isOn: self.$record) {
+                    Toggle(isOn: self.$record.animation()) {
                         Text("记录进度")
                     }
+                    
                     if self.record {
                         HStack {
                             Text("进度单位")
@@ -75,22 +57,45 @@ struct EditiPage: View {
                             Text("进度总量")
                             TextField("必填", text: self.$total )
                         }
+                        
                     }
                 }
-                Section {
-                    VStack {
-                        Toggle(isOn: self.$clockIn) {
-                            Text("打卡项目")
+                if self.record {
+                    Section {
+                        VStack {
+                            Toggle(isOn: self.$clockIn) {
+                                Text("打卡项目")
+                            }
+                            Text("打卡项目每次打卡进度量 + 1,不填写进度单位及进度总量时开启,将自动填充天数为进度总量")
+                                .font(.caption)
+                                .opacity(0.4)
                         }
-                        Text("打卡项目每次打卡进度量 + 1,不填写进度单位及进度总量时开启,将自动填充天数为进度总量")
-                            .font(.caption)
-                            .opacity(0.4)
                     }
+                    
                 }
             }
+            .navigationBarTitle(Text("新增项目"), displayMode: .inline)
+            .navigationBarItems(
+                leading:
+                Image(systemName: "xmark")
+                .onTapGesture {
+                    self.show.wrappedValue.dismiss()
+                    },
+                trailing:
+                Image(systemName: "checkmark")
+                .onTapGesture {
+                    self.userDate.add(data: singleToDo(title: self.title, date: Date()))
+                    self.show.wrappedValue.dismiss()
+                    }
+            )
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
+
+
+
+
 
 struct EditiPage_Previews: PreviewProvider {
     static var previews: some View {
