@@ -10,7 +10,7 @@ import SwiftUI
 
 struct EditiPage: View {
     @State var title:String = ""
-    @State var StartDate:Date = Date()
+    @State var remindDate:Date = Date()
     @State var endDate:Date = Date()
     @State var record:Bool = true
     @State var unit:String = ""
@@ -18,7 +18,7 @@ struct EditiPage: View {
     @State var clockIn:Bool = false
     //用来保存用户为此项目选择的标签
     @State var newTags:[String] = []
-    @EnvironmentObject var userDate:ToDo
+    @EnvironmentObject var userData:ToDo
     @Environment(\.presentationMode) var show
     
     var body: some View {
@@ -29,18 +29,19 @@ struct EditiPage: View {
                     HStack {
                         Text("项目名称")
                         TextField("例如:读完<<乔布斯自传>>", text: $title)
+                            .padding(.leading,30)
                         
                     }
-                    NavigationLink(destination: TagP(tags: $userDate.tags,newTags: $newTags)) {
+                    NavigationLink(destination: TagP(tags: $userData.tags,newTags: $newTags)) {
                         Text("标签")
                     }
                 }
                 Section {
-                    DatePicker(selection: self.$StartDate) {
-                        Text("开始时间")
+                    DatePicker(selection: self.$remindDate) {
+                        Text("提醒我")
                     }
                     DatePicker(selection: self.$endDate) {
-                        Text("结束时间")
+                        Text("截止时间")
                     }
                 }
                 Section {
@@ -52,10 +53,12 @@ struct EditiPage: View {
                         HStack {
                             Text("进度单位")
                             TextField("例如: 章,课,小时等", text: self.$unit )
+                                .padding(.leading,30)
                         }
                         HStack {
                             Text("进度总量")
                             TextField("必填", text: self.$total )
+                                .padding(.leading,30)
                         }
                         
                     }
@@ -71,24 +74,33 @@ struct EditiPage: View {
                                 .opacity(0.4)
                         }
                     }
-                    
+                }
+                Section {
+                    HStack {
+                        Text("项目名称")
+                        TextField("例如:读完<<乔布斯自传>>", text: $title)
+                            .padding(.leading,30)
+                        
+                    }
                 }
             }
             .navigationBarTitle(Text("新增项目"), displayMode: .inline)
             .navigationBarItems(
                 leading:
-                Image(systemName: "xmark")
-                .onTapGesture {
-                    self.show.wrappedValue.dismiss()
-                    },
+                    Image(systemName: "xmark")
+                    .padding(10)
+                    .onTapGesture {
+                        self.show.wrappedValue.dismiss()
+                        },
                 trailing:
                 Image(systemName: "checkmark")
-                .onTapGesture {
-                    self.userDate.add(data: singleToDo(title: self.title, date: Date()))
-                    self.show.wrappedValue.dismiss()
-                    }
+                    .padding(10)
+                    .onTapGesture {
+                        self.userData.add(data: singleToDo(title: self.title, date: Date()))
+                        self.show.wrappedValue.dismiss()
+                        }
             )
-            .navigationBarBackButtonHidden(true)
+//            .navigationBarBackButtonHidden(true)
         }
     }
 }

@@ -9,6 +9,7 @@
 
 import Foundation
 
+
 //编码器,对于需要保存的数据在存储之前需要先进行编码
 var encoder = JSONEncoder()
 //解码器,对于从存储中取出的数据,需要先进行解码才能使用
@@ -41,6 +42,13 @@ class ToDo:ObservableObject {
         count += 1
         self.dataStore()
     }
+    
+    // 删除数据,不能直接删除,只能对这条 todo,打个删除的标记
+    func delete(id:Int) {
+        self.toDoList[id].delete = true
+        self.dataStore()
+    }
+    
     //编辑
     
     //删除,不能直接删除数组中的元素,因为 swift 的刷新机制决定的,数据必须要存在才能刷新,所以只能做上删除的标记,等下次运行前把要删除的数据剔除即可
@@ -70,3 +78,9 @@ struct singleToDo:Identifiable,Codable {
     var delete:Bool = false
     var id:Int = 0
 }
+
+//struct Tags:Identifiable,Codable {
+//    var tag:String
+//    var delete:Bool
+//    var id:Int
+//}
