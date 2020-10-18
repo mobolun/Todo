@@ -8,6 +8,7 @@
 
 
 import Foundation
+import SwiftUI
 
 
 //编码器,对于需要保存的数据在存储之前需要先进行编码
@@ -19,15 +20,19 @@ var decoder = JSONDecoder()
 //创建一个类,用来生成一个列表,名字不可与项目名相同
 class ToDo:ObservableObject {
     @Published var toDoList:[singleToDo] = []
-    
     //默认可选标签
-    var tags:[String] = ["生活","锻炼","学习"]
+    @Published var tags:[TagList] = []
     var count:Int = 0
+    var TCount:Int = 0
     
-    init(data:[singleToDo]) {
+    init(data:[singleToDo],tags:[TagList]) {
         for i in data {
             self.toDoList.append(singleToDo(title: i.title, isChecked: i.isChecked, date: i.date, delete: i.delete, id: self.count))
             count += 1
+        }
+        tags.forEach { tag in
+            self.tags.append(TagList(str: tag.str,id: self.TCount))
+            TCount += 1
         }
     }
     
@@ -49,17 +54,36 @@ class ToDo:ObservableObject {
         self.dataStore()
     }
     
+    // 添加分类清单
+    func addTag(data:TagList) {
+        self.tags.append(TagList(str: data.str, id: self.TCount))
+        TCount += 1
+        self.tagStore()
+    }
+    // 删除分类清单
+    func tagDelete(id:Int) {
+        self.tags[id].delete = true
+        self.tagStore()
+    }
+    
+    
+    
     //编辑
     
     //删除,不能直接删除数组中的元素,因为 swift 的刷新机制决定的,数据必须要存在才能刷新,所以只能做上删除的标记,等下次运行前把要删除的数据剔除即可
     
     //排序,
     
-    //存储,每一次数据发生变化都要做一次存储,要保存的数据类型必须附合"Codable"协议
+    //存储任务,每一次数据发生变化都要做一次存储,要保存的数据类型必须附合"Codable"协议
     func dataStore() {
-        //先进行存储前的编码
+        //先进行存储前的编码encoder
         let dataEnEnd = try! encoder.encode(self.toDoList)
         UserDefaults.standard.set(dataEnEnd, forKey: "toDoList")
+    }
+    //存储清单
+    func tagStore() {
+        let tagEnEnd = try! encoder.encode(self.tags)
+        UserDefaults.standard.set(tagEnEnd, forKey: "tags")
     }
     
 }
@@ -79,8 +103,16 @@ struct singleToDo:Identifiable,Codable {
     var id:Int = 0
 }
 
-//struct Tags:Identifiable,Codable {
-//    var tag:String
-//    var delete:Bool
-//    var id:Int
-//}
+//固定的分类清单
+struct  SysList:Identifiable {
+    var img:String = ""
+    var color:Color = Color(#colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1))
+    var str:String = ""
+    var id:Int = 0
+}
+// 系统清单
+struct TagList:Identifiable,Codable {
+    var str:String
+    var delete:Bool = false
+    var id:Int = 0
+}

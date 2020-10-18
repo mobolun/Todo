@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-
+//import UIKit
 
 
 // 删除需要被删除的数据
@@ -24,12 +24,6 @@ func initUserData() -> [singleToDo] {
                 outPut.append(singleToDo(title: ToDoOne.title,tags: ToDoOne.tags, isChecked: ToDoOne.isChecked, date: ToDoOne.date, delete: ToDoOne.delete, id: ToDoOne.id))
             }
         }
-        
-//        for i in data {
-//            if !i.delete {
-//                outPut.append(singleToDo(title: i.title, isChecked: i.isChecked, date: i.date, delete: i.delete, id: i.id))
-//            }
-//        }
         //返回整理好的数据
         return outPut
     } else {
@@ -37,10 +31,34 @@ func initUserData() -> [singleToDo] {
         return outPut
     }
 }
+// 整理清单,只取不删除的清单
+func initTags() -> [TagList] {
+    var outPut:[TagList] = []
+    let t:[String] = ["生活","锻炼","学习"]
+    var count = 0
+    if let tagsDeEnd = UserDefaults.standard.object(forKey: "tags") as? Data {
+        let tags = try! decoder.decode([TagList].self, from: tagsDeEnd)
+        tags.forEach { tag in
+            if !tag.delete {
+                outPut.append(TagList(str: tag.str, id: tag.id))
+            }
+        }
+    } else {
+        // 如果没有取出数据,给用户一个默认数据
+        
+        t.forEach { tag in
+            outPut.append(TagList(str: tag, id: count))
+            count += 1
+        }
+        
+    }
+    return outPut
+}
+
 
 struct ContentView: View {
     
-    @ObservedObject var userData:ToDo = ToDo(data: initUserData())
+    @ObservedObject var userData:ToDo = ToDo(data: initUserData(),tags: initTags())
 //    @ObservedObject var userData:ToDo = ToDo(data: [singleToDo(title: "抓一个 Zack", tags: ["生活","学习"], isChecked: true, delete: false)])
     @State var show:Bool = false
     @State var toDoName:String = ""
@@ -49,6 +67,7 @@ struct ContentView: View {
             Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1))
                 .edgesIgnoringSafeArea(.all)
                 .opacity(0.9)
+            
             VStack {
                 title()
                     .padding(.leading)
@@ -153,10 +172,10 @@ struct title: View {
     var body: some View {
         HStack {
             Button(action: {self.show.toggle()}, label: {
-                Image(systemName: "tag")
+                Image(systemName: "list.star")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width:23)
+                    .frame(width:24)
                     .foregroundColor(Color.red)
                     .cornerRadius(5)
             })
@@ -165,14 +184,22 @@ struct title: View {
                     .environmentObject(self.userData)
             })
             Spacer()
-            Text("全部项目")
+            Text("重要")
             Spacer()
-            Button(action: {print("tag")}){
-                Image(systemName: "ellipsis")
+            Button(action: {}){
+                Image(systemName: "magnifyingglass")
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
                 .foregroundColor(Color.red)
-                .frame(width: 5, height: 5)
+                .frame(width: 24)
+                .padding(.trailing,15)
+            }
+            Button(action: {print("tag")}){
+                Image(systemName: "gearshape")
+                .resizable()
+                .scaledToFit()
+                .foregroundColor(Color.red)
+                .frame(width: 24)
                 .padding(.trailing,30)
             }
         }

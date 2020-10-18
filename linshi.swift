@@ -12,7 +12,8 @@
 
 import MapKit
 import SwiftUI
-//import UIKit
+import UIKit
+import StoreKit
 
 
 
@@ -24,40 +25,12 @@ struct Contentview: View {
     @State private var showActionSheet = false
     @State var text:String = ""
     @State var password:String = ""
+    
     var body:some View {
+        Text("ksksk")
+//        .tabViewStyle(PageTabViewStyle())
         
         
-        ZStack {
-            GroupBox(
-                label: Label(
-                    title: { Text("Enter your Details") },
-                    icon: { Image(systemName: "sun.min") }).font(.subheadline),
-                content: {
-                    VStack {
-                        TextField("Username",text:$text)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding(5)
-                        SecureField("Password",text:$password)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding(5)
-                        Button(action: {}, label: {
-                            Image(systemName: "chevron.right")
-                                .renderingMode(.template)
-                                .foregroundColor(.black)
-                                .frame(width: 30, height: 30)
-                                .padding(10)
-                                .background(Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)))
-                                .cornerRadius(10)
-                        })
-                        .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 10, x: -10, y: -10 )
-                        .shadow(color: Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)).opacity(0.4),radius: 10,x:10,y:10)
-                    }
-            })
-            .cornerRadius(10)
-            .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 10, x: -10, y: -10)
-            .shadow(color: Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)).opacity(0.4), radius: 10, x: 10, y: 10)
-            .padding()
-        }
 //        .edgesIgnoringSafeArea(.all)
 //        .frame(maxWidth:.infinity,maxHeight: .infinity)
         
@@ -94,6 +67,14 @@ struct Contentview: View {
 }
 
 
+struct Sidebar: View {
+    var body: some View {
+        List(1..<100) { i in
+            Text("Row \(i)")
+        }
+        .listStyle(SidebarListStyle())
+    }
+}
 
 
 

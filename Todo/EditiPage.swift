@@ -27,21 +27,36 @@ struct EditiPage: View {
                 
                 Section {
                     HStack {
-                        Text("项目名称")
-                        TextField("例如:读完<<乔布斯自传>>", text: $title)
-                            .padding(.leading,30)
+                        Image(systemName: "circle").scaleEffect(1.7)
+                        TextField("添加任务", text: $title)
+                            .padding(.leading,15)
+                        Image(systemName: "star").scaleEffect(1.2)
                         
                     }
-                    NavigationLink(destination: TagP(tags: $userData.tags,newTags: $newTags)) {
-                        Text("标签")
+                    .padding(.vertical,15)
+                    NavigationLink(destination: TagP(newTags: $newTags).environmentObject(self.userData)) {
+                        Label(
+                            title: { Text("分类清单") },
+                            icon: { Image(systemName: "list.star") })
                     }
                 }
                 Section {
                     DatePicker(selection: self.$remindDate) {
-                        Text("提醒我")
+//                        Text("提醒我")
+                        Label(
+                            title: { Text("给我提醒") },
+                            icon: { Image(systemName: "bell") })
                     }
                     DatePicker(selection: self.$endDate) {
-                        Text("截止时间")
+//                        Text("截止时间")
+                        Label(
+                            title: { Text("截止时间") },
+                            icon: { Image(systemName: "calendar.badge.clock") })
+                    }
+                    NavigationLink(destination: TagP(newTags: $newTags).environmentObject(self.userData)) {
+                        Label(
+                            title: { Text("重复频率") },
+                            icon: { Image(systemName: "arrow.triangle.2.circlepath") })
                     }
                 }
                 Section {
@@ -75,16 +90,8 @@ struct EditiPage: View {
                         }
                     }
                 }
-                Section {
-                    HStack {
-                        Text("项目名称")
-                        TextField("例如:读完<<乔布斯自传>>", text: $title)
-                            .padding(.leading,30)
-                        
-                    }
-                }
             }
-            .navigationBarTitle(Text("新增项目"), displayMode: .inline)
+            .navigationBarTitle(Text("添加任务"), displayMode: .inline)
             .navigationBarItems(
                 leading:
                     Image(systemName: "xmark")

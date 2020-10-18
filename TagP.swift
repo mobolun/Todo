@@ -13,30 +13,35 @@ import SwiftUI
 //import Foundation
 
 struct TagP: View {
-    @Binding var tags: [String]
+    
     @Binding var newTags:[String]
     @State var showAlert = false
     @State var isRemove = false
     @State var str:String = ""
+    @EnvironmentObject var userData:ToDo
     @Environment(\.presentationMode) var show
     
     var body: some View {
         VStack{
             //添加标签
             HStack {
-                TextField("自定义新标签", text: $str, onCommit:  {
+                TextField("添加新的清单", text: $str, onCommit:  {
                     self.str = self.str.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
-                    if !self.str.isEmpty && !self.tags.contains(self.str) {
-                        self.tags.append(self.str)
-                        self.str = ""
+                    userData.tags.forEach { tag in
+                        if !self.str.isEmpty && self.str != tag.str {
+                            userData.addTag(data: TagList(str: self.str))
+                            self.str = ""
+                        }
                     }
                 })
                 .font(Font.system(size: 18, weight: .medium, design: .serif))
                 Button (action: {
                     self.str = self.str.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
-                    if !self.str.isEmpty && !self.tags.contains(self.str) {
-                        self.tags.append(self.str)
-                        self.str = ""
+                    userData.tags.forEach { tag in
+                        if !self.str.isEmpty && self.str != tag.str {
+                            userData.addTag(data: TagList(str: self.str))
+                            self.str = ""
+                        }
                     }
                 }){
                     Image(systemName: "plus").foregroundColor(Color(#colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)))
@@ -59,7 +64,7 @@ struct TagP: View {
         }
         .padding(.top,80)
         .padding(.horizontal,15)
-        .navigationBarTitle(Text("选择标签"), displayMode: .inline)
+        .navigationBarTitle(Text("选择清单"), displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(
             leading:
@@ -75,7 +80,11 @@ struct TagP: View {
                 .onTapGesture {
                     if self.isRemove {
                         self.newTags.forEach { tag in
-                            self.tags.removeAll{ $0 == tag }
+                            userData.tags.forEach { T in
+                                if tag == T.str {
+                                    userData.tagDelete(id: T.id)
+                                }
+                            }
                         }
                     } else {
                         self.show.wrappedValue.dismiss()
@@ -88,38 +97,37 @@ struct TagP: View {
         //用来存标签的总值
         var width = CGFloat.zero
         var height = CGFloat.zero
-//        var plusWidth = CGFloat.zero
-//        var plusHeight = CGFloat.zero
-        
         return ZStack(alignment: .topLeading) {
-            ForEach(self.tags, id: \.self) { tag in
-                TagOne(newTags: self.$newTags,tags: self.$tags, text: tag,isChekced: self.newTags.contains(tag),isRemove: self.$isRemove)//"Ninetendo"
-                    .padding(.horizontal,4)
-                    .padding(.bottom,8)
-                    .alignmentGuide(.leading, computeValue: { d in/*这里的d指的是每一个文本视图（子视图）*/
-                        //如果View总宽超过容器宽度,则换行
-                        if (abs(width - d.width) > geometry.size.width) {
-                            //换行
-                            width = 0
-                            height -= d.height
-                        }
-                        let result = width
-                        if tag == self.tags.last! {
-//                            plusWidth = width - d.width
-                            width = 0
-                        } else {
-                            width -= d.width
-                        }
-                        return result
-                    })
-                    .alignmentGuide(.top, computeValue: {d in
-                        let result = height
-                        if tag == self.tags.last! {
-//                            plusHeight = height
-                            height = 0 // last item
-                        }
-                        return result
-                    })
+            ForEach(self.userData.tags) { tag in
+                if !tag.delete {
+                    TagOne(newTags: self.$newTags, text: tag.str,isChekced: self.newTags.contains(tag.str),isRemove: self.$isRemove)//"Ninetendo"
+                        .padding(.horizontal,4)
+                        .padding(.bottom,8)
+                        .alignmentGuide(.leading, computeValue: { d in/*这里的d指的是每一个文本视图（子视图）*/
+                            //如果View总宽超过容器宽度,则换行
+                            if (abs(width - d.width) > geometry.size.width) {
+                                //换行
+                                width = 0
+                                height -= d.height
+                            }
+                            let result = width
+                            if tag.str == userData.tags.filter{ $0.delete == false}.last!.str {
+    //                            plusWidth = width - d.width
+                                width = 0
+                            } else {
+                                width -= d.width
+                            }
+                            return result
+                        })
+                        .alignmentGuide(.top, computeValue: {d in
+                            let result = height
+                            if tag.str == userData.tags.filter{ $0.delete == false}.last!.str {
+    //                            plusHeight = height
+                                height = 0 // last item
+                            }
+                            return result
+                        })
+                }
             }
         }
     }
@@ -129,7 +137,6 @@ struct TagP: View {
 
 struct TagOne: View {
     @Binding var newTags:[String]
-    @Binding var tags:[String]
     var text:String = ""
     @State var isChekced:Bool = false
     @Binding var isRemove:Bool
@@ -206,6 +213,6 @@ extension Text {
 
 struct TagP_Previews: PreviewProvider {
     static var previews: some View {
-        TagP(tags: .constant(["生活","锻炼","学习"]), newTags: .constant([]))
+        TagP(newTags: .constant([]))
     }
 }
