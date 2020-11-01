@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E56C7D4424E2D5B80060B393 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C7D4324E2D5B80060B393 /* UserData.swift */; };
+		E533412F2546D43A00EDEC2C /* creatTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533412E2546D43A00EDEC2C /* creatTodo.swift */; };
+		E53341362547192600EDEC2C /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53341352547192600EDEC2C /* Radio.swift */; };
+		E533414125474CFA00EDEC2C /* userdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533414025474CFA00EDEC2C /* userdata.swift */; };
+		E533414625474D4300EDEC2C /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533414525474D4300EDEC2C /* Wave.swift */; };
 		E56CF2C424F29F57009A081A /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CF2C324F29F57009A081A /* AnimationView.swift */; };
 		E56F1C32252DB569006E3EBD /* linshi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56F1C31252DB569006E3EBD /* linshi.swift */; };
 		E56F7AC824D22D1A00E82E21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56F7AC724D22D1A00E82E21 /* AppDelegate.swift */; };
@@ -18,12 +21,21 @@
 		E56F7AD424D22D1B00E82E21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E56F7AD224D22D1B00E82E21 /* LaunchScreen.storyboard */; };
 		E577217424FBD1B300F172D4 /* TagP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E577217324FBD1B300F172D4 /* TagP.swift */; };
 		E5871EE924EBB0630089E90B /* EditiPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5871EE824EBB0630089E90B /* EditiPage.swift */; };
+		E5A27E92254B68B8008B297C /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A27E91254B68B8008B297C /* TodoManager.swift */; };
+		E5BC23EF25483DF5008B5063 /* CircularRular.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BC23EE25483DF5008B5063 /* CircularRular.swift */; };
+		E5BC23F32548555A008B5063 /* DarkButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BC23F22548555A008B5063 /* DarkButtonStyle.swift */; };
+		E5D41D9D254ECE0800393F52 /* TextF.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D41D9C254ECE0800393F52 /* TextF.swift */; };
+		E5F20626254613960019B555 /* RoundedHexagoan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F20624254613960019B555 /* RoundedHexagoan.swift */; };
+		E5F2062A2546142D0019B555 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F206292546142D0019B555 /* PagerView.swift */; };
 		E5F2E19F253347B600C8B4C3 /* showFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F2E19E253347B600C8B4C3 /* showFilter.swift */; };
 		E5F62B1524EDB9B000DA6CA8 /* SignUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F62B1424EDB9B000DA6CA8 /* SignUP.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E56C7D4324E2D5B80060B393 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		E533412E2546D43A00EDEC2C /* creatTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = creatTodo.swift; path = Todo/Views/creatTodo.swift; sourceTree = SOURCE_ROOT; };
+		E53341352547192600EDEC2C /* Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Radio.swift; path = Todo/Views/Radio.swift; sourceTree = SOURCE_ROOT; };
+		E533414025474CFA00EDEC2C /* userdata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userdata.swift; sourceTree = "<group>"; };
+		E533414525474D4300EDEC2C /* Wave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
 		E56CF2C324F29F57009A081A /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		E56F1C31252DB569006E3EBD /* linshi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = linshi.swift; sourceTree = "<group>"; };
 		E56F7AC424D22D1A00E82E21 /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,6 +49,12 @@
 		E577217324FBD1B300F172D4 /* TagP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagP.swift; sourceTree = "<group>"; };
 		E5871EE824EBB0630089E90B /* EditiPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditiPage.swift; sourceTree = "<group>"; };
 		E5A05CB024E9063A00421935 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		E5A27E91254B68B8008B297C /* TodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
+		E5BC23EE25483DF5008B5063 /* CircularRular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularRular.swift; sourceTree = "<group>"; };
+		E5BC23F22548555A008B5063 /* DarkButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkButtonStyle.swift; sourceTree = "<group>"; };
+		E5D41D9C254ECE0800393F52 /* TextF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextF.swift; sourceTree = "<group>"; };
+		E5F20624254613960019B555 /* RoundedHexagoan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedHexagoan.swift; path = Todo/View/RoundedHexagoan.swift; sourceTree = SOURCE_ROOT; };
+		E5F206292546142D0019B555 /* PagerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
 		E5F2E19E253347B600C8B4C3 /* showFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = showFilter.swift; sourceTree = "<group>"; };
 		E5F62B1424EDB9B000DA6CA8 /* SignUP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,10 +70,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E56F7ABB24D22D1A00E82E21 = {
+		E533413925474ACB00EDEC2C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E5F206292546142D0019B555 /* PagerView.swift */,
+				E5F20624254613960019B555 /* RoundedHexagoan.swift */,
+				E5BC23EE25483DF5008B5063 /* CircularRular.swift */,
+				E5BC23F22548555A008B5063 /* DarkButtonStyle.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E533413C25474B7500EDEC2C /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				E577217324FBD1B300F172D4 /* TagP.swift */,
+				E533412E2546D43A00EDEC2C /* creatTodo.swift */,
+				E53341352547192600EDEC2C /* Radio.swift */,
+				E5D41D9C254ECE0800393F52 /* TextF.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E533413D25474B9300EDEC2C /* userSignUP */ = {
+			isa = PBXGroup;
+			children = (
+				E5F62B1424EDB9B000DA6CA8 /* SignUP.swift */,
+			);
+			path = userSignUP;
+			sourceTree = "<group>";
+		};
+		E533413F25474CD500EDEC2C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E5A27E8C254B67F0008B297C /* Model Controller */,
+				E533414025474CFA00EDEC2C /* userdata.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E533414425474D4300EDEC2C /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				E533414525474D4300EDEC2C /* Wave.swift */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		E56F7ABB24D22D1A00E82E21 = {
+			isa = PBXGroup;
+			children = (
 				E56F1C31252DB569006E3EBD /* linshi.swift */,
 				E56CF2C324F29F57009A081A /* AnimationView.swift */,
 				E56F7AC624D22D1A00E82E21 /* Todo */,
@@ -74,12 +138,15 @@
 		E56F7AC624D22D1A00E82E21 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
-				E5F62B1624EDCED600DA6CA8 /* userSignUP */,
+				E533414425474D4300EDEC2C /* Graph */,
+				E533413F25474CD500EDEC2C /* Models */,
+				E533413D25474B9300EDEC2C /* userSignUP */,
+				E533413C25474B7500EDEC2C /* Views */,
+				E533413925474ACB00EDEC2C /* View */,
 				E56F7AC724D22D1A00E82E21 /* AppDelegate.swift */,
 				E56F7AC924D22D1A00E82E21 /* SceneDelegate.swift */,
 				E56F7ACB24D22D1A00E82E21 /* ContentView.swift */,
 				E5F2E19E253347B600C8B4C3 /* showFilter.swift */,
-				E56C7D4324E2D5B80060B393 /* UserData.swift */,
 				E56F7ACD24D22D1B00E82E21 /* Assets.xcassets */,
 				E5A05CB024E9063A00421935 /* README.md */,
 				E5871EE824EBB0630089E90B /* EditiPage.swift */,
@@ -98,12 +165,12 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		E5F62B1624EDCED600DA6CA8 /* userSignUP */ = {
+		E5A27E8C254B67F0008B297C /* Model Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E5F62B1424EDB9B000DA6CA8 /* SignUP.swift */,
+				E5A27E91254B68B8008B297C /* TodoManager.swift */,
 			);
-			name = userSignUP;
+			path = "Model Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,14 +245,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				E56F7AC824D22D1A00E82E21 /* AppDelegate.swift in Sources */,
+				E5F20626254613960019B555 /* RoundedHexagoan.swift in Sources */,
 				E56CF2C424F29F57009A081A /* AnimationView.swift in Sources */,
+				E533412F2546D43A00EDEC2C /* creatTodo.swift in Sources */,
+				E533414125474CFA00EDEC2C /* userdata.swift in Sources */,
 				E5F62B1524EDB9B000DA6CA8 /* SignUP.swift in Sources */,
+				E5BC23F32548555A008B5063 /* DarkButtonStyle.swift in Sources */,
+				E533414625474D4300EDEC2C /* Wave.swift in Sources */,
+				E5D41D9D254ECE0800393F52 /* TextF.swift in Sources */,
 				E56F7ACA24D22D1A00E82E21 /* SceneDelegate.swift in Sources */,
 				E577217424FBD1B300F172D4 /* TagP.swift in Sources */,
 				E56F1C32252DB569006E3EBD /* linshi.swift in Sources */,
 				E5F2E19F253347B600C8B4C3 /* showFilter.swift in Sources */,
-				E56C7D4424E2D5B80060B393 /* UserData.swift in Sources */,
+				E5A27E92254B68B8008B297C /* TodoManager.swift in Sources */,
 				E56F7ACC24D22D1A00E82E21 /* ContentView.swift in Sources */,
+				E53341362547192600EDEC2C /* Radio.swift in Sources */,
+				E5F2062A2546142D0019B555 /* PagerView.swift in Sources */,
+				E5BC23EF25483DF5008B5063 /* CircularRular.swift in Sources */,
 				E5871EE924EBB0630089E90B /* EditiPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

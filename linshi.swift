@@ -26,15 +26,16 @@ struct Contentview: View {
     @State var text:String = ""
     @State var password:String = ""
     
+    @State private var greeting: String = "Hello world!"
+   
     var body:some View {
-        Text("ksksk")
-//        .tabViewStyle(PageTabViewStyle())
-        
-        
-//        .edgesIgnoringSafeArea(.all)
-//        .frame(maxWidth:.infinity,maxHeight: .infinity)
-        
-        
+        TextField("Welcome", text: $greeting, onEditingChanged: { (editingChanged) in
+            if editingChanged {
+                print("TextField focused")
+            } else {
+                print("TextField focus removed")
+            }
+        })
         
         
         
@@ -67,15 +68,24 @@ struct Contentview: View {
 }
 
 
-struct Sidebar: View {
-    var body: some View {
-        List(1..<100) { i in
-            Text("Row \(i)")
-        }
-        .listStyle(SidebarListStyle())
+struct PlaceholderTextFieldStyle: TextFieldStyle {
+    let placeholder: String
+    @Binding var text: String
+
+    init(_ placeholder: String, text: Binding<String>) {
+        self.placeholder = placeholder
+        self._text = text
+    }
+
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        ZStack {
+            if text.isEmpty {
+                Text(placeholder)
+            }
+            configuration
+        }.foregroundColor(.white)
     }
 }
-
 
 
 struct Contentview_Previews: PreviewProvider {

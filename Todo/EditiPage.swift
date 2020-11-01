@@ -9,7 +9,11 @@
 import SwiftUI
 
 struct EditiPage: View {
-    @State var title:String = ""
+    var editing:Bool = false
+    var title:String = "添加任务"
+    var id:Int = 0
+    var isCheck:Bool = false
+    @State var name:String = ""
     @State var remindDate:Date = Date()
     @State var endDate:Date = Date()
     @State var record:Bool = true
@@ -27,14 +31,20 @@ struct EditiPage: View {
                 
                 Section {
                     HStack {
-                        Image(systemName: "circle").scaleEffect(1.7)
-                        TextField("添加任务", text: $title)
+                        Image(systemName: self.isCheck ? "checkmark.circle.fill" : "circle")
+                            .scaleEffect(1.7)
+                            .padding(.leading,5)
+                        TextField("添加任务", text: $name)
                             .padding(.leading,15)
                         Image(systemName: "star").scaleEffect(1.2)
                         
                     }
                     .padding(.vertical,15)
-                    NavigationLink(destination: TagP(newTags: $newTags).environmentObject(self.userData)) {
+                    NavigationLink(destination: TagP(
+                        editing: self.editing,
+                        newTags: $newTags
+                    )
+                    .environmentObject(self.userData)) {
                         Label(
                             title: { Text("分类清单") },
                             icon: { Image(systemName: "list.star") })
@@ -91,7 +101,7 @@ struct EditiPage: View {
                     }
                 }
             }
-            .navigationBarTitle(Text("添加任务"), displayMode: .inline)
+            .navigationBarTitle(Text(self.title), displayMode: .inline)
             .navigationBarItems(
                 leading:
                     Image(systemName: "xmark")
@@ -103,7 +113,13 @@ struct EditiPage: View {
                 Image(systemName: "checkmark")
                     .padding(10)
                     .onTapGesture {
-                        self.userData.add(data: singleToDo(title: self.title, date: Date()))
+                        if self.editing {
+                            // 修改
+                            self.userData.editTodo(id: self.id, data: singleToDo(title: self.name, tags: self.newTags, isChecked: self.isCheck))
+                        } else {
+                            // 增加
+                            self.userData.addTodo(data: singleToDo(title: self.name,tags: self.newTags))
+                        }
                         self.show.wrappedValue.dismiss()
                         }
             )

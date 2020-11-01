@@ -13,54 +13,26 @@ import SwiftUI
 //import Foundation
 
 struct TagP: View {
-    
+    var editing:Bool = false
     @Binding var newTags:[String]
     @State var showAlert = false
     @State var isRemove = false
     @State var str:String = ""
+    @State var showImput:Bool = false
     @EnvironmentObject var userData:ToDo
     @Environment(\.presentationMode) var show
     
     var body: some View {
         VStack{
             //添加标签
-            HStack {
-                TextField("添加新的清单", text: $str, onCommit:  {
-                    self.str = self.str.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
-                    userData.tags.forEach { tag in
-                        if !self.str.isEmpty && self.str != tag.str {
-                            userData.addTag(data: TagList(str: self.str))
-                            self.str = ""
-                        }
-                    }
-                })
-                .font(Font.system(size: 18, weight: .medium, design: .serif))
-                Button (action: {
-                    self.str = self.str.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
-                    userData.tags.forEach { tag in
-                        if !self.str.isEmpty && self.str != tag.str {
-                            userData.addTag(data: TagList(str: self.str))
-                            self.str = ""
-                        }
-                    }
-                }){
-                    Image(systemName: "plus").foregroundColor(Color(#colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)))
-                        .padding(10)
-                        
-                }
-            }
-            .padding(.vertical,7)
-            .padding(.horizontal,20)
-            .background(RoundedRectangle(cornerRadius: 30)
-                            .foregroundColor(Color(#colorLiteral(red: 0.9327854397, green: 0.9420209391, blue: 0.9420209391, alpha: 1))))
-            .overlay(RoundedRectangle(cornerRadius: 40)
-                .stroke(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)), lineWidth: 0.1))
+            TextF(str: $str,showImput: $showImput)
             
             //排列标签
             GeometryReader {
                 self.generateContent(geometry: $0)
             }
             .padding(.top,30)
+            .animation(Animation.easeIn(duration: 0.3))
         }
         .padding(.top,80)
         .padding(.horizontal,15)
@@ -72,7 +44,9 @@ struct TagP: View {
                 .padding(10)
                 .onTapGesture {
                     self.show.wrappedValue.dismiss()
-                    self.newTags = []
+                    if !self.editing {
+                        self.newTags = []
+                    }
                     },
             trailing:
                 Image(systemName: self.isRemove ? "trash":"checkmark")
@@ -131,6 +105,8 @@ struct TagP: View {
             }
         }
     }
+    
+    
 }
 
 
