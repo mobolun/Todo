@@ -27,7 +27,7 @@ class ToDo:ObservableObject {
     
     init(data:[singleToDo],tags:[TagList]) {
         data.forEach { todo in
-            self.toDoList.append(singleToDo(id: self.count, title: todo.title, tags: todo.tags, isChecked: todo.isChecked, date: todo.date))
+            self.toDoList.append(singleToDo(id: self.count, title: todo.title, tags: todo.tags, isChecked: todo.isChecked, date: todo.date,isImportant: todo.isImportant))
             count += 1
         }
         
@@ -37,14 +37,20 @@ class ToDo:ObservableObject {
         }
     }
     
-    //向外部提供一个可以切换开关
+    //切换是否勾选
     func check(id:Int) {
         self.toDoList[id].isChecked.toggle()
         self.todoStore()
     }
+    // 切换是否重要
+    func important(id:Int) {
+        self.toDoList[id].isImportant.toggle()
+        self.todoStore()
+    }
+    
     // 增
     func addTodo(data:singleToDo) {
-        self.toDoList.append(singleToDo(id: self.count, title: data.title,tags: data.tags))
+        self.toDoList.append(singleToDo(id: self.count, title: data.title,tags: data.tags,isChecked: data.isChecked,isImportant: data.isImportant))
         count += 1
         self.todoStore()
     }
@@ -57,6 +63,8 @@ class ToDo:ObservableObject {
     func editTodo(id:Int,data:singleToDo) {
         self.toDoList[id].title = data.title
         self.toDoList[id].tags = data.tags
+        self.toDoList[id].isChecked = data.isChecked
+        self.toDoList[id].isImportant = data.isImportant
         self.todoStore()
     }
     // 修改 todo's tag
@@ -106,6 +114,7 @@ struct singleToDo:Identifiable,Codable {
     var isChecked:Bool = false
     var date:Date = Date()
     var delete:Bool = false
+    var isImportant:Bool = false
     
 }
 

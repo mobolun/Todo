@@ -8,6 +8,9 @@
 
 import SwiftUI
 //import UIKit
+//import Introspect
+//import SwiftUIX
+
 
 
 // 删除需要被删除的数据
@@ -21,7 +24,7 @@ func initUserData() -> [singleToDo] {
         //整理数据,只保留没有删除标记的数据
         data.forEach { ToDoOne in
             if !ToDoOne.delete {
-                outPut.append(singleToDo(id: ToDoOne.id, title: ToDoOne.title,tags: ToDoOne.tags, isChecked: ToDoOne.isChecked, date: ToDoOne.date, delete: ToDoOne.delete))
+                outPut.append(singleToDo(id: ToDoOne.id, title: ToDoOne.title,tags: ToDoOne.tags, isChecked: ToDoOne.isChecked, date: ToDoOne.date, delete: ToDoOne.delete,isImportant: ToDoOne.isImportant))
             }
         }
         //返回整理好的数据
@@ -59,10 +62,11 @@ func initTags() -> [TagList] {
 struct ContentView: View {
     
     @ObservedObject var userData:ToDo = ToDo(data: initUserData(),tags: initTags())
+    @ObservedObject var OffsetUp:Sheet = Sheet(size:UIScreen.main.bounds.size)
 //    @ObservedObject var userData:ToDo = ToDo(data: [singleToDo(title: "抓一个 Zack", tags: ["生活","学习"], isChecked: true, delete: false)])
     @State var show:Bool = false
     @State var toDoName:String = ""
-    @State var title:String = "任务"
+    @State var title:String = "所有任务"
     
     
     var body: some View {
@@ -82,16 +86,24 @@ struct ContentView: View {
                 ScrollView (.vertical, showsIndicators: true) {
                     VStack (spacing:2){
                         ForEach(self.userData.toDoList) { todo in
-                            if !todo.delete {
+                            
+                            if !todo.delete && todo.tags.contains(title) {
                                 ItemN(index: todo.id, title: $title)
                                     .environmentObject(self.userData)
-                                    
+                            } else if !todo.delete && title == "重要" && todo.isImportant {
+                                ItemN(index: todo.id, title: $title)
+                                    .environmentObject(self.userData)
+                            } else if !todo.delete && title == "所有任务" {
+                                ItemN(index: todo.id, title: $title)
+                                    .environmentObject(self.userData)
                             }
                         }
                     }
                     .padding(.vertical)
 
                 }
+                
+                
                 
                 Button(action: {
                     self.show.toggle()
@@ -245,6 +257,7 @@ struct ItemN: View {
                         title:"编辑任务",
                         id:index,
                         isCheck: todoOne.isChecked,
+                        isImportant: todoOne.isImportant,
                         name:todoOne.title,
                         newTags: todoOne.tags
                         
@@ -253,9 +266,12 @@ struct ItemN: View {
                 }
                 .environmentObject(self.userData)
             
-            Image(systemName: "star")
+            Image(systemName: userData.toDoList[index].isImportant ? "star.fill" : "star")
 //                .scaleEffect()
                 .padding(20)
+                .onTapGesture {
+                    userData.important(id: index)
+                }
         }
         .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
         .cornerRadius(10, antialiased: true)

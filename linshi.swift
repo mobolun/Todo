@@ -27,24 +27,38 @@ struct Contentview: View {
     @State var password:String = ""
     
     @State private var greeting: String = "Hello world!"
-   
+    
+    
+    @State private var pass = ""
+
+    
+    
     var body:some View {
-        TextField("Welcome", text: $greeting, onEditingChanged: { (editingChanged) in
+        TextField("Welcome", text: $greeting, onEditingChanged: { editingChanged in
             if editingChanged {
                 print("TextField focused")
             } else {
                 print("TextField focus removed")
             }
         })
+            
+        
+    
         
         
         
-//        OutlineGroup(<#T##data: _##_#>, id: <#T##KeyPath<DataElement, _>#>, children: <#T##KeyPath<DataElement, _?>#>) { element in
-//            Text("Placeholder")
-//        }
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
 //        ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
-        
-//        SecureField(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=Label@*/"Password"/*@END_MENU_TOKEN@*/, text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("Apple")/*@END_MENU_TOKEN@*/)
         
 //        SignInWithAppleButton(
 //            onRequest: { request in
@@ -55,11 +69,6 @@ struct Contentview: View {
 //            }
 //        )
         
-//        TabView(selection: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Selection@*/.constant(1)/*@END_MENU_TOKEN@*/) {
-//            Text("Tab Content 1").tabItem { /*@START_MENU_TOKEN@*/Text("Tab Label 1")/*@END_MENU_TOKEN@*/ }.tag(1)
-//            Text("Tab Content 2").tabItem { /*@START_MENU_TOKEN@*/Text("Tab Label 2")/*@END_MENU_TOKEN@*/ }.tag(2)
-//        }
-        
 //        .clipShape(RoundedRectangle(cornerRadius: 10))
 //        Map(coordinateRegion: $region)
         
@@ -67,25 +76,18 @@ struct Contentview: View {
     }
 }
 
-
-struct PlaceholderTextFieldStyle: TextFieldStyle {
-    let placeholder: String
-    @Binding var text: String
-
-    init(_ placeholder: String, text: Binding<String>) {
-        self.placeholder = placeholder
-        self._text = text
+extension Contentview {
+    var tab1: some View {
+        Image(systemName: "cloud.drizzle")
     }
-
-    func _body(configuration: TextField<Self._Label>) -> some View {
-        ZStack {
-            if text.isEmpty {
-                Text(placeholder)
-            }
-            configuration
-        }.foregroundColor(.white)
+    var tab2: some View {
+        Image(systemName: "trash")
     }
 }
+
+
+
+
 
 
 struct Contentview_Previews: PreviewProvider {

@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E524710025725D3E00887557 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = E52470FF25725D3E00887557 /* Introspect */; };
 		E533412F2546D43A00EDEC2C /* creatTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533412E2546D43A00EDEC2C /* creatTodo.swift */; };
 		E53341362547192600EDEC2C /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53341352547192600EDEC2C /* Radio.swift */; };
 		E533414125474CFA00EDEC2C /* userdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533414025474CFA00EDEC2C /* userdata.swift */; };
@@ -24,6 +25,8 @@
 		E5A27E92254B68B8008B297C /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A27E91254B68B8008B297C /* TodoManager.swift */; };
 		E5BC23EF25483DF5008B5063 /* CircularRular.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BC23EE25483DF5008B5063 /* CircularRular.swift */; };
 		E5BC23F32548555A008B5063 /* DarkButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BC23F22548555A008B5063 /* DarkButtonStyle.swift */; };
+		E5D0D2682575ADB4006C63F6 /* CustomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D0D2672575ADB4006C63F6 /* CustomSheet.swift */; };
+		E5D0D26B2575AE28006C63F6 /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D0D26A2575AE28006C63F6 /* Sheet.swift */; };
 		E5D41D9D254ECE0800393F52 /* TextF.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D41D9C254ECE0800393F52 /* TextF.swift */; };
 		E5F20626254613960019B555 /* RoundedHexagoan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F20624254613960019B555 /* RoundedHexagoan.swift */; };
 		E5F2062A2546142D0019B555 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F206292546142D0019B555 /* PagerView.swift */; };
@@ -52,6 +55,8 @@
 		E5A27E91254B68B8008B297C /* TodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
 		E5BC23EE25483DF5008B5063 /* CircularRular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularRular.swift; sourceTree = "<group>"; };
 		E5BC23F22548555A008B5063 /* DarkButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkButtonStyle.swift; sourceTree = "<group>"; };
+		E5D0D2672575ADB4006C63F6 /* CustomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSheet.swift; sourceTree = "<group>"; };
+		E5D0D26A2575AE28006C63F6 /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
 		E5D41D9C254ECE0800393F52 /* TextF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextF.swift; sourceTree = "<group>"; };
 		E5F20624254613960019B555 /* RoundedHexagoan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedHexagoan.swift; path = Todo/View/RoundedHexagoan.swift; sourceTree = SOURCE_ROOT; };
 		E5F206292546142D0019B555 /* PagerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
@@ -64,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E524710025725D3E00887557 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +79,7 @@
 		E533413925474ACB00EDEC2C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E577217324FBD1B300F172D4 /* TagP.swift */,
 				E5F206292546142D0019B555 /* PagerView.swift */,
 				E5F20624254613960019B555 /* RoundedHexagoan.swift */,
 				E5BC23EE25483DF5008B5063 /* CircularRular.swift */,
@@ -84,10 +91,10 @@
 		E533413C25474B7500EDEC2C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E577217324FBD1B300F172D4 /* TagP.swift */,
 				E533412E2546D43A00EDEC2C /* creatTodo.swift */,
 				E53341352547192600EDEC2C /* Radio.swift */,
 				E5D41D9C254ECE0800393F52 /* TextF.swift */,
+				E5D0D2672575ADB4006C63F6 /* CustomSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -103,7 +110,6 @@
 		E533413F25474CD500EDEC2C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E5A27E8C254B67F0008B297C /* Model Controller */,
 				E533414025474CFA00EDEC2C /* userdata.swift */,
 			);
 			path = Models;
@@ -138,6 +144,7 @@
 		E56F7AC624D22D1A00E82E21 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				E5C6BFC22551656D00D690DF /* ViewModel */,
 				E533414425474D4300EDEC2C /* Graph */,
 				E533413F25474CD500EDEC2C /* Models */,
 				E533413D25474B9300EDEC2C /* userSignUP */,
@@ -165,12 +172,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		E5A27E8C254B67F0008B297C /* Model Controller */ = {
+		E5C6BFC22551656D00D690DF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				E5A27E91254B68B8008B297C /* TodoManager.swift */,
+				E5D0D26A2575AE28006C63F6 /* Sheet.swift */,
 			);
-			path = "Model Controller";
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +197,9 @@
 			dependencies = (
 			);
 			name = Todo;
+			packageProductDependencies = (
+				E52470FF25725D3E00887557 /* Introspect */,
+			);
 			productName = Todo;
 			productReference = E56F7AC424D22D1A00E82E21 /* Todo.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +228,9 @@
 				Base,
 			);
 			mainGroup = E56F7ABB24D22D1A00E82E21;
+			packageReferences = (
+				E52470FE25725D3E00887557 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+			);
 			productRefGroup = E56F7AC524D22D1A00E82E21 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -244,11 +258,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5D0D2682575ADB4006C63F6 /* CustomSheet.swift in Sources */,
 				E56F7AC824D22D1A00E82E21 /* AppDelegate.swift in Sources */,
 				E5F20626254613960019B555 /* RoundedHexagoan.swift in Sources */,
 				E56CF2C424F29F57009A081A /* AnimationView.swift in Sources */,
 				E533412F2546D43A00EDEC2C /* creatTodo.swift in Sources */,
 				E533414125474CFA00EDEC2C /* userdata.swift in Sources */,
+				E5D0D26B2575AE28006C63F6 /* Sheet.swift in Sources */,
 				E5F62B1524EDB9B000DA6CA8 /* SignUP.swift in Sources */,
 				E5BC23F32548555A008B5063 /* DarkButtonStyle.swift in Sources */,
 				E533414625474D4300EDEC2C /* Wave.swift in Sources */,
@@ -405,11 +421,12 @@
 				DEVELOPMENT_TEAM = 7TJKWD96L3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Todo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = erye.Todo;
+				PRODUCT_BUNDLE_IDENTIFIER = eryers.Todo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -425,11 +442,12 @@
 				DEVELOPMENT_TEAM = 7TJKWD96L3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Todo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = erye.Todo;
+				PRODUCT_BUNDLE_IDENTIFIER = eryers.Todo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -458,6 +476,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E52470FE25725D3E00887557 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E52470FF25725D3E00887557 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E52470FE25725D3E00887557 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E56F7ABC24D22D1A00E82E21 /* Project object */;
 }

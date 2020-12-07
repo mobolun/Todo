@@ -7,12 +7,14 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct EditiPage: View {
     var editing:Bool = false
     var title:String = "添加任务"
     var id:Int = 0
-    var isCheck:Bool = false
+    @State var isCheck:Bool = false
+    @State var isImportant:Bool = false
     @State var name:String = ""
     @State var remindDate:Date = Date()
     @State var endDate:Date = Date()
@@ -20,6 +22,7 @@ struct EditiPage: View {
     @State var unit:String = ""
     @State var total:String = ""
     @State var clockIn:Bool = false
+    @State var showTextFeild:Bool = true
     //用来保存用户为此项目选择的标签
     @State var newTags:[String] = []
     @EnvironmentObject var userData:ToDo
@@ -34,9 +37,21 @@ struct EditiPage: View {
                         Image(systemName: self.isCheck ? "checkmark.circle.fill" : "circle")
                             .scaleEffect(1.7)
                             .padding(.leading,5)
-                        TextField("添加任务", text: $name)
-                            .padding(.leading,15)
-                        Image(systemName: "star").scaleEffect(1.2)
+                            .onTapGesture {
+                                isCheck.toggle()
+                            }
+                        // 这里必须要加个判断,否则会出现上下弹的情况
+                        if showTextFeild {
+                            TextField("添加任务", text: $name)
+                                .padding(.leading,15)
+                                .introspectTextField { T in
+                                    T.becomeFirstResponder()
+                                }
+                        }
+                        Image(systemName:isImportant ? "star.fill" : "star").scaleEffect(1.2)
+                            .onTapGesture {
+                                isImportant.toggle()
+                            }
                         
                     }
                     .padding(.vertical,15)
@@ -89,7 +104,7 @@ struct EditiPage: View {
                     }
                 }
                 if self.record {
-                    Section {
+                    Section(content: {
                         VStack {
                             Toggle(isOn: self.$clockIn) {
                                 Text("打卡项目")
@@ -98,7 +113,7 @@ struct EditiPage: View {
                                 .font(.caption)
                                 .opacity(0.4)
                         }
-                    }
+                    })
                 }
             }
             .navigationBarTitle(Text(self.title), displayMode: .inline)
@@ -107,18 +122,20 @@ struct EditiPage: View {
                     Image(systemName: "xmark")
                     .padding(10)
                     .onTapGesture {
+                        showTextFeild = false
                         self.show.wrappedValue.dismiss()
                         },
                 trailing:
                 Image(systemName: "checkmark")
                     .padding(10)
                     .onTapGesture {
+                        showTextFeild = false
                         if self.editing {
                             // 修改
-                            self.userData.editTodo(id: self.id, data: singleToDo(title: self.name, tags: self.newTags, isChecked: self.isCheck))
+                            self.userData.editTodo(id: self.id, data: singleToDo(title: self.name, tags: self.newTags, isChecked: self.isCheck,isImportant: self.isImportant))
                         } else {
                             // 增加
-                            self.userData.addTodo(data: singleToDo(title: self.name,tags: self.newTags))
+                            self.userData.addTodo(data: singleToDo(title: self.name,tags: self.newTags,isChecked: self.isCheck,isImportant: self.isImportant))
                         }
                         self.show.wrappedValue.dismiss()
                         }
@@ -132,8 +149,8 @@ struct EditiPage: View {
 
 
 
-struct EditiPage_Previews: PreviewProvider {
-    static var previews: some View {
-        EditiPage()
-    }
-}
+//struct EditiPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditiPage()
+//    }
+//}

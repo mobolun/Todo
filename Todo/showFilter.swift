@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+//import Introspect
 //import Foundation
 
 struct showFilter: View {
@@ -29,7 +30,7 @@ struct showFilter: View {
     var id:Int = 0
     var moveTo:Bool = false
     
-    
+    // 查指定 tag 的任务总数
     func tagCount(tag:String) -> Int {
         var count = 0
         self.userData.toDoList.forEach { todo in
@@ -40,7 +41,16 @@ struct showFilter: View {
         return count
     }
     
-    
+    // 查重要的任务总数
+    func importantCount(str:String) -> Int {
+        var count = 0
+        self.userData.toDoList.forEach { todo in
+            if str == "重要" && todo.isImportant {
+                count += 1
+            }
+        }
+        return count
+    }
     
     
     //对List的外观进行定制
@@ -74,9 +84,15 @@ struct showFilter: View {
                     
                     ForEach(self.sysList) { itme in
                         if moveTo && itme.str == "任务" {
-                            Fixed(img: itme.img,color: itme.color, str: itme.str, count: 10,id:id,moveTo: moveTo)
+                            Fixed(img: itme.img,color: itme.color, str: itme.str, count: importantCount(str:itme.str),id:id,moveTo: moveTo)
                         } else if !moveTo {
-                            Fixed(img: itme.img,color: itme.color, str: itme.str, count: 10,id:id,moveTo: moveTo)
+                            Button(action: {
+                                mainTitle = itme.str
+                                self.show.wrappedValue.dismiss()
+                            }, label: {
+                                Fixed(img: itme.img,color: itme.color, str: itme.str, count: importantCount(str:itme.str),id:id,moveTo: moveTo)
+                            })
+                            
                         }
                         
                         
@@ -85,13 +101,8 @@ struct showFilter: View {
                 .padding(.vertical,10)
                 .padding(.top,10)
                 
-//                .padding(.vertical,10)
-                
-//                Divider()
-//                    .padding(.horizontal,15)
-//                    .padding(.top,12)
-                
                 List {
+                    
                     ForEach(self.userData.tags){ tag in
                         if !tag.delete {
                             Button(action: {
@@ -153,6 +164,10 @@ struct showFilter: View {
                 } else if showImput {
                     TextF(str:$str,showImput:$showImput)
                         .padding(25)
+                        .introspectTextField { T in
+                            T.becomeFirstResponder()
+                        }
+                        
                 }
                 
             }
@@ -163,6 +178,7 @@ struct showFilter: View {
                     .scaleEffect(1)
                     .padding(10)
                     .onTapGesture {
+                        showImput = false
                         self.show.wrappedValue.dismiss()
                     }
 //                trailing:
@@ -219,12 +235,14 @@ struct Fixed: View {
             
             HStack{
                 Image(systemName: self.img)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width:20)
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width:20)
+                    .scaleEffect(1.2)
                     .padding(.trailing,15)
                     .foregroundColor(self.color)
                 Text(self.str)
+                    .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                 Spacer()
                 Image(systemName: moveTo && self.userData.toDoList[id].tags.contains(self.str) ? "checkmark" : "")
                     .padding(.trailing,10)
@@ -266,8 +284,8 @@ struct newTagAdd:View {
 
 
 
-struct showFilter_Previews: PreviewProvider {
-    static var previews: some View {
-        showFilter(mainTitle: .constant("任务"), moveTo: false)
-    }
-}
+//struct showFilter_Previews: PreviewProvider {
+//    static var previews: some View {
+//        showFilter(mainTitle: .constant("任务"), moveTo: false)
+//    }
+//}

@@ -7,11 +7,13 @@
 //
 
 import SwiftUI
+//import Introspect
 
 struct TextF: View {
     @Binding var str:String
     @Binding var showImput:Bool
     @EnvironmentObject var userData:ToDo
+    @State var isFocus:Bool = true
     var body: some View {
         HStack {
             TextField("添加新的清单", text: $str, onCommit:  {
@@ -20,7 +22,10 @@ struct TextF: View {
                 addtag(str: self.str)
                 self.str = ""
             })
+            
 //                .font(Font.system(size: 18, weight: .medium, design: .serif))
+            
+                
             Button (action: {
                 self.str = self.str.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
                 addtag(str: self.str)
