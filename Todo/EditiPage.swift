@@ -47,6 +47,7 @@ struct EditiPage: View {
                                 .introspectTextField { T in
                                     T.becomeFirstResponder()
                                 }
+                                
                         }
                         Image(systemName:isImportant ? "star.fill" : "star").scaleEffect(1.2)
                             .onTapGesture {

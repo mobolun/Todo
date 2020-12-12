@@ -20,19 +20,20 @@ func initUserData() -> [singleToDo] {
     //取出数据
     if let dataDeEnd = UserDefaults.standard.object(forKey: "toDoList") as? Data {
         //解码
-        let data = try! decoder.decode([singleToDo].self, from: dataDeEnd)
+        let data = try? decoder.decode([singleToDo].self, from: dataDeEnd)
         //整理数据,只保留没有删除标记的数据
-        data.forEach { ToDoOne in
-            if !ToDoOne.delete {
-                outPut.append(singleToDo(id: ToDoOne.id, title: ToDoOne.title,tags: ToDoOne.tags, isChecked: ToDoOne.isChecked, date: ToDoOne.date, delete: ToDoOne.delete,isImportant: ToDoOne.isImportant))
+        if !data!.isEmpty {
+            data!.forEach { ToDoOne in
+                if !ToDoOne.delete {
+                    outPut.append(singleToDo(id: ToDoOne.id, title: ToDoOne.title,tags: ToDoOne.tags, isChecked: ToDoOne.isChecked, date: ToDoOne.date, delete: ToDoOne.delete,isImportant: ToDoOne.isImportant,offset: ToDoOne.offset))
+                }
             }
+            //返回整理好的数据
+            return outPut
         }
-        //返回整理好的数据
-        return outPut
-    } else {
-        //如果没有取出值,那返回空数组也是可以的
-        return outPut
     }
+    //如果没有取出值,那返回空数组也是可以的
+    return outPut
 }
 // 整理清单,只取不删除的清单
 func initTags() -> [TagList] {
@@ -86,17 +87,20 @@ struct ContentView: View {
                 ScrollView (.vertical, showsIndicators: true) {
                     VStack (spacing:2){
                         ForEach(self.userData.toDoList) { todo in
-                            
-                            if !todo.delete && todo.tags.contains(title) {
-                                ItemN(index: todo.id, title: $title)
-                                    .environmentObject(self.userData)
-                            } else if !todo.delete && title == "重要" && todo.isImportant {
-                                ItemN(index: todo.id, title: $title)
-                                    .environmentObject(self.userData)
-                            } else if !todo.delete && title == "所有任务" {
-                                ItemN(index: todo.id, title: $title)
-                                    .environmentObject(self.userData)
-                            }
+                                
+                                if !todo.delete && todo.tags.contains(title) {
+                                    TodoItem(title: $title, index: todo.id)
+                                        .environmentObject(self.userData)
+                                        .leftOrRight(todo:todo, index:todo.id, userData:userData)
+                                } else if !todo.delete && title == "重要" && todo.isImportant {
+                                    TodoItem(title: $title, index: todo.id)
+                                        .environmentObject(self.userData)
+                                        .leftOrRight(todo:todo, index:todo.id, userData:userData)
+                                } else if !todo.delete && title == "所有任务" {
+                                    TodoItem(title: $title, index: todo.id)
+                                        .environmentObject(self.userData)
+                                        .leftOrRight(todo:todo, index:todo.id, userData:userData)
+                                }
                         }
                     }
                     .padding(.vertical)
@@ -115,6 +119,7 @@ struct ContentView: View {
                     .foregroundColor(.red)
                     .opacity(0.7)
                     .padding(.bottom,30)
+                    
                 }
                 .sheet(isPresented: self.$show) {
                     EditiPage()
@@ -197,104 +202,14 @@ struct Item: View {
                 .destructive(Text("删除"), action: { self.userData.deleteTodo(id: self.index) }),
                 .default(Text("移动")) {  },
                 .default(Text("加入到我的一天")) { },
-                .cancel()    // 这个是最下面的取消按钮,也可以写成 .cancel{}
+                .cancel()  // 这个是最下面的取消按钮,也可以写成 .cancel{}
             ])
         }
      
     }
 }
 
-struct ItemN: View {
-    @EnvironmentObject var userData:ToDo
-    var index:Int
-    @State var showMuen:Bool = false
-    @State var show:Bool = false
-    @State var move:Bool = false
-    @Binding var title:String
-    var body: some View {
-        HStack (alignment: .center, spacing: 0) {
-            
-            // 自定义的单选框样式
-//            Radio(index: index)
-//                .environmentObject(self.userData)
-            Radio(index:index)
-                .environmentObject(self.userData)
-            
-            HStack (alignment:.center, spacing: 0, content: {
-                Text(userData.toDoList[index].title)
-                Spacer()
-            })
-            .frame(maxWidth: .infinity, maxHeight:.infinity)
-            .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
-            .onTapGesture(count: 1, perform: {
-                self.showMuen = true
-            })
-            
-            .actionSheet(isPresented: $showMuen) {
-                ActionSheet(title: Text("你想干啥"), buttons: [
-                    .default(Text("修改")){
-                        self.show.toggle()
-                        self.move = false
-                    },
-                    .destructive(Text("删除"), action: { self.userData.deleteTodo(id: self.index) }),
-                    .default(Text("移动")){
-                        self.show.toggle()
-                        self.move = true
-                    },
-                    .default(Text("加入到我的一天")) { },
-                    .cancel()    // 这个是最下面的取消按钮,也可以写成 .cancel{}
-                ])
-            }
-            
-            .sheet(isPresented: self.$show ) {
-                let todoOne = self.userData.toDoList[index]
-                if self.move {
-                    showFilter(mainTitle: $title, title:"移动至", id: index, moveTo: true)
-                        .environmentObject(self.userData)
-                } else {
-                    EditiPage(
-                        editing:true,
-                        title:"编辑任务",
-                        id:index,
-                        isCheck: todoOne.isChecked,
-                        isImportant: todoOne.isImportant,
-                        name:todoOne.title,
-                        newTags: todoOne.tags
-                        
-                    )
-                }
-                }
-                .environmentObject(self.userData)
-            
-            Image(systemName: userData.toDoList[index].isImportant ? "star.fill" : "star")
-//                .scaleEffect()
-                .padding(20)
-                .onTapGesture {
-                    userData.important(id: index)
-                }
-        }
-        .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
-        .cornerRadius(10, antialiased: true)
-        .padding(.horizontal, 10)
-        .gesture(
-            DragGesture(minimumDistance: 10)    //滑动距离超出这个值才视为有效滑动
-                .onChanged({ value in
-                    // 当这个值大于 0 视为右滑,小于 0 则为左滑
-                    if value.translation.width > 0 {
-//                        if !mail.isRead {
-//                            manager.handleReadGesture(mail: mail, swipeWidth: value.translation.width)
-//                        }
-                    } else if value.translation.width < 0 {
-//                        manager.handleDeleteGesture(mail: mail, swipeWidth: value.translation.width)
-                    }
-                })
-                // 当滑动结束,要么把视图复位,要么就显示滑动后的操作
-                .onEnded({ _ in
-//                    manager.swipeEnded()
-                })
-        )
-    }
-}
+
 
 struct TopBarView: View {
     @Binding var title:String

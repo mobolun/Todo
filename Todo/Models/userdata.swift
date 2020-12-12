@@ -27,7 +27,7 @@ class ToDo:ObservableObject {
     
     init(data:[singleToDo],tags:[TagList]) {
         data.forEach { todo in
-            self.toDoList.append(singleToDo(id: self.count, title: todo.title, tags: todo.tags, isChecked: todo.isChecked, date: todo.date,isImportant: todo.isImportant))
+            self.toDoList.append(singleToDo(id: self.count, title: todo.title, tags: todo.tags, isChecked: todo.isChecked, date: todo.date,isImportant: todo.isImportant,offset: todo.offset))
             count += 1
         }
         
@@ -50,7 +50,7 @@ class ToDo:ObservableObject {
     
     // 增
     func addTodo(data:singleToDo) {
-        self.toDoList.append(singleToDo(id: self.count, title: data.title,tags: data.tags,isChecked: data.isChecked,isImportant: data.isImportant))
+        self.toDoList.append(singleToDo(id: self.count, title: data.title,tags: data.tags,isChecked: data.isChecked,isImportant: data.isImportant,offset: data.offset))
         count += 1
         self.todoStore()
     }
@@ -65,6 +65,7 @@ class ToDo:ObservableObject {
         self.toDoList[id].tags = data.tags
         self.toDoList[id].isChecked = data.isChecked
         self.toDoList[id].isImportant = data.isImportant
+        self.toDoList[id].offset = data.offset
         self.todoStore()
     }
     // 修改 todo's tag
@@ -86,6 +87,15 @@ class ToDo:ObservableObject {
         self.tagStore()
     }
     
+    // 复位其它 todo 的划动操作
+    func cancelOffcet() {
+        self.toDoList.forEach { (todo) in
+            if todo.offset != 0 {
+                toDoList[todo.id].offset = 0
+                toDoList[todo.id].direction = ""
+            }
+        }
+    }
     
     //存储任务,每一次数据发生变化都要做一次存储,要保存的数据类型必须附合"Codable"协议
     func todoStore() {
@@ -115,6 +125,8 @@ struct singleToDo:Identifiable,Codable {
     var date:Date = Date()
     var delete:Bool = false
     var isImportant:Bool = false
+    var offset:CGFloat = 0
+    var direction:String = ""
     
 }
 

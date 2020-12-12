@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E524710025725D3E00887557 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = E52470FF25725D3E00887557 /* Introspect */; };
 		E533412F2546D43A00EDEC2C /* creatTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533412E2546D43A00EDEC2C /* creatTodo.swift */; };
 		E53341362547192600EDEC2C /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53341352547192600EDEC2C /* Radio.swift */; };
 		E533414125474CFA00EDEC2C /* userdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533414025474CFA00EDEC2C /* userdata.swift */; };
@@ -22,11 +21,13 @@
 		E56F7AD424D22D1B00E82E21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E56F7AD224D22D1B00E82E21 /* LaunchScreen.storyboard */; };
 		E577217424FBD1B300F172D4 /* TagP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E577217324FBD1B300F172D4 /* TagP.swift */; };
 		E5871EE924EBB0630089E90B /* EditiPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5871EE824EBB0630089E90B /* EditiPage.swift */; };
+		E5988B8E258027E700A9ABA2 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5988B8D258027E700A9ABA2 /* TodoItem.swift */; };
 		E5A27E92254B68B8008B297C /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A27E91254B68B8008B297C /* TodoManager.swift */; };
 		E5BC23EF25483DF5008B5063 /* CircularRular.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BC23EE25483DF5008B5063 /* CircularRular.swift */; };
 		E5BC23F32548555A008B5063 /* DarkButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BC23F22548555A008B5063 /* DarkButtonStyle.swift */; };
 		E5D0D2682575ADB4006C63F6 /* CustomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D0D2672575ADB4006C63F6 /* CustomSheet.swift */; };
 		E5D0D26B2575AE28006C63F6 /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D0D26A2575AE28006C63F6 /* Sheet.swift */; };
+		E5D26195257EDA7D001A0379 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = E5D26194257EDA7D001A0379 /* Introspect */; };
 		E5D41D9D254ECE0800393F52 /* TextF.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D41D9C254ECE0800393F52 /* TextF.swift */; };
 		E5F20626254613960019B555 /* RoundedHexagoan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F20624254613960019B555 /* RoundedHexagoan.swift */; };
 		E5F2062A2546142D0019B555 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F206292546142D0019B555 /* PagerView.swift */; };
@@ -51,6 +52,7 @@
 		E56F7AD524D22D1B00E82E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E577217324FBD1B300F172D4 /* TagP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagP.swift; sourceTree = "<group>"; };
 		E5871EE824EBB0630089E90B /* EditiPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditiPage.swift; sourceTree = "<group>"; };
+		E5988B8D258027E700A9ABA2 /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 		E5A05CB024E9063A00421935 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E5A27E91254B68B8008B297C /* TodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
 		E5BC23EE25483DF5008B5063 /* CircularRular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularRular.swift; sourceTree = "<group>"; };
@@ -69,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E524710025725D3E00887557 /* Introspect in Frameworks */,
+				E5D26195257EDA7D001A0379 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +81,7 @@
 		E533413925474ACB00EDEC2C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E5F2E19E253347B600C8B4C3 /* showFilter.swift */,
 				E577217324FBD1B300F172D4 /* TagP.swift */,
 				E5F206292546142D0019B555 /* PagerView.swift */,
 				E5F20624254613960019B555 /* RoundedHexagoan.swift */,
@@ -95,6 +98,7 @@
 				E53341352547192600EDEC2C /* Radio.swift */,
 				E5D41D9C254ECE0800393F52 /* TextF.swift */,
 				E5D0D2672575ADB4006C63F6 /* CustomSheet.swift */,
+				E5988B8D258027E700A9ABA2 /* TodoItem.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -130,6 +134,7 @@
 				E56CF2C324F29F57009A081A /* AnimationView.swift */,
 				E56F7AC624D22D1A00E82E21 /* Todo */,
 				E56F7AC524D22D1A00E82E21 /* Products */,
+				E5D26193257EDA7D001A0379 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -153,7 +158,6 @@
 				E56F7AC724D22D1A00E82E21 /* AppDelegate.swift */,
 				E56F7AC924D22D1A00E82E21 /* SceneDelegate.swift */,
 				E56F7ACB24D22D1A00E82E21 /* ContentView.swift */,
-				E5F2E19E253347B600C8B4C3 /* showFilter.swift */,
 				E56F7ACD24D22D1B00E82E21 /* Assets.xcassets */,
 				E5A05CB024E9063A00421935 /* README.md */,
 				E5871EE824EBB0630089E90B /* EditiPage.swift */,
@@ -181,6 +185,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		E5D26193257EDA7D001A0379 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -198,7 +209,7 @@
 			);
 			name = Todo;
 			packageProductDependencies = (
-				E52470FF25725D3E00887557 /* Introspect */,
+				E5D26194257EDA7D001A0379 /* Introspect */,
 			);
 			productName = Todo;
 			productReference = E56F7AC424D22D1A00E82E21 /* Todo.app */;
@@ -274,6 +285,7 @@
 				E56F1C32252DB569006E3EBD /* linshi.swift in Sources */,
 				E5F2E19F253347B600C8B4C3 /* showFilter.swift in Sources */,
 				E5A27E92254B68B8008B297C /* TodoManager.swift in Sources */,
+				E5988B8E258027E700A9ABA2 /* TodoItem.swift in Sources */,
 				E56F7ACC24D22D1A00E82E21 /* ContentView.swift in Sources */,
 				E53341362547192600EDEC2C /* Radio.swift in Sources */,
 				E5F2062A2546142D0019B555 /* PagerView.swift in Sources */,
@@ -489,7 +501,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E52470FF25725D3E00887557 /* Introspect */ = {
+		E5D26194257EDA7D001A0379 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E52470FE25725D3E00887557 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;

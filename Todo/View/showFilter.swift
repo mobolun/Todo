@@ -45,7 +45,7 @@ struct showFilter: View {
     func importantCount(str:String) -> Int {
         var count = 0
         self.userData.toDoList.forEach { todo in
-            if str == "重要" && todo.isImportant {
+            if str == "重要" && !todo.delete &&  todo.isImportant {
                 count += 1
             }
         }
